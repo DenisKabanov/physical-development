@@ -19,21 +19,26 @@ header a {
 }
 
 h1, .h1 {
+  font-family: Helvetica;
+
   color: #fff;
   display: inline-block;
-  font-size: 20px;
+  font-size: 30px;
   margin-left: 12px;
   margin-top: 20px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 a, .a {
+  font-family: Helvetica;
   color: #fff;
   display: inline-block;
   font-size: 20px;
   margin-left: 12px;
   margin-top: 20px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  line-height: 0.5;
+
 }
 
 form {
@@ -72,6 +77,15 @@ input[class="middle"]{
   width: 150px;
 }
 
+input[class="gender"]{
+  font-size: 10px;
+  height: 10px;
+  margin-left: 12px;
+  padding-left: 12px;
+  width: 30px;
+
+}
+
 input[type="date"]{
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -87,7 +101,7 @@ input[type="date"]{
   height: 30px;
   margin-left: 0px;
   padding-left: 12px;
-  width: 150px;
+  width: 180px;
 }
 
 input[class="short"]{
