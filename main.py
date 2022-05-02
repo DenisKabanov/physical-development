@@ -1,15 +1,21 @@
 import eel
 import cgi
-from apps import determine_the_passport_age
+import json
+import re
 
 
-eel.init("web")
-
-eel.start("web_main.html", size=(1000, 1000))
-#
-# print(determine_the_passport_age('01/02/2022', '23/02/2022'))
+def save_common_info(last_name, first_name, dad_name, dob, doi):
+    return last_name, first_name, dad_name, dob, doi
 
 
-form = cgi.FieldStorage()
-dob = form.getvalue('dob')
-print(dob)
+@eel.expose
+def convert_value_py(last_name, first_name, dad_name, dob, doi):
+    return save_common_info(last_name, first_name, dad_name, dob, doi)
+
+
+if __name__ == '__main__':
+    eel.init("web")
+    eel.start("web_main.html", size=(900, 800))
+
+
+
