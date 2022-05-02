@@ -1,9 +1,10 @@
 import eel
-import cgi
-import json
-import re
+import database
 
 
+
+
+#TODO add output info
 def save_common_info(last_name, first_name, dad_name, dob, doi):
     return last_name, first_name, dad_name, dob, doi
 
