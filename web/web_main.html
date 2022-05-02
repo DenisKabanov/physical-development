@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="./css/web_main.css">
 </head>
 <body>
-<form name = "n1" action="/cgi-bin/main.py" method="get">
-
-    <h1>Введите данные</h1>
+    <h1> </h1>
+    <a class="header">Введите данные</a>
+    <h1></h1>
 
     <div class="front-sign-in">
-        <input type="text" class="middle" placeholder="Фамилия">
-        <input type="text" class="middle" placeholder="Имя">
-        <input type="text" class="middle" placeholder="Отчество">
+        <input type="text" class="middle" id="last_name" placeholder="Фамилия">
+        <input type="text" class="middle" id="first_name" placeholder="Имя">
+        <input type="text" class="middle" id="dad_name" placeholder="Отчество">
         <a><font size="4">Пол</font></a>
         <a></a>
         <input type="radio" name="gender"> <a><font size="3">М</font></a>
@@ -81,11 +81,16 @@
         </div>
 
     <h1></h1>
-    <div>
-        <input class="signin-submit" type="submit" value="Submit">
-    </div>
 
-<script src="js_functions.jsf"></script>
-    </form>
+        <button class="border-button" type="button" value="Submit" id="submit">Отправить</button>
+
+
+    <h1></h1>
+        <a class="header">Результат</a>
+    <input id="output">
+        <h1></h1>
+
+<script src="js_functions.js"></script>
+
 </body>
 </html>

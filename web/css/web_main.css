@@ -18,16 +18,6 @@ header a {
   font-weight: bold;
 }
 
-h1, .h1 {
-  font-family: Helvetica;
-
-  color: #fff;
-  display: inline-block;
-  font-size: 30px;
-  margin-left: 12px;
-  margin-top: 20px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
 
 a, .a {
   font-family: Helvetica;
@@ -39,6 +29,12 @@ a, .a {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   line-height: 0.5;
 
+}
+
+.header {
+  font-size: 30px;
+  margin-top: 0px;
+  margin-button: 10px;
 }
 
 form {
@@ -83,7 +79,6 @@ input[class="gender"]{
   margin-left: 12px;
   padding-left: 12px;
   width: 30px;
-
 }
 
 input[type="date"]{
@@ -126,76 +121,55 @@ input[type="text"]:focus:focus {
   outline: none;
 }
 
-input[type="submit"] {
-  -webkit-border-radius: 0 4px 4px 0;
-  -moz-border-radius: 0 4px 4px 0;
-  -ms-border-radius: 0 4px 4px 0;
-  -o-border-radius: 0 4px 4px 0;
-  border-radius: 0 4px 4px 0;
-  background-color: #f60;
-  border: 0;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
-  color: #fff;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  height: 52px;
-  padding: 0 12px;
+.border-button {
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px 20px 20px 12px;
+  position: relative;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, .4);
+  background: none;
+  font-family: 'Helvetica';
   text-transform: uppercase;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.54);
-  z-index: -1;
-  margin-left: 12px;
+  height: 50px;
+  width: 120px;
 }
 
-.signin-submit {
-  right: -80px;
+.border-button:before, .border-button:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+.border-button:before {
+  bottom: 0;
+  left: 0;
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  transition: 0s ease opacity .8s, .2s ease width .4s, .2s ease height .6s;
+}
+.border-button:after {
+  top: 0;
+  right: 0;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  transition: 0s ease opacity .4s, .2s ease width, .2s ease height .2s;
 }
 
-.signup-submit {
-  right: -145px;
+.border-button:hover:before,
+.border-button:hover:after {
+  height: 100%;
+  width: 100%;
+  opacity: 1;
 }
-
-.signup-submit:hover, .signin-submit:hover {text-shadow: 0 0 1px #fff;}
-
-/* ����� ���� vladmaxi, ����� ������� */
-.vladmaxi-top{
-	line-height: 24px;
-	font-size: 11px;
-	background: #eee;
-	text-transform: uppercase;
-	z-index: 9999;
-	position: fixed;
-	top:0;
-	left:0;
-	width:100%;
-	font-family: calibri;
-	font-size: 13px;
-	box-shadow: 1px 0px 2px rgba(0,0,0,0.2);
-	-webkit-animation: slideOut 0.5s ease-in-out 0.3s backwards;
+.border-button:hover:before {
+  transition: 0s ease opacity 0s, .2s ease height, .2s ease width .2s;
 }
-@-webkit-keyframes slideOut{
-	0%{top:-30px; opacity: 0;}
-	100%{top:0px; opacity: 1;}
+.border-button:hover:after {
+  transition: 0s ease opacity .4s, .2s ease height .4s, .2s ease width .6s;
 }
-
-.vladmaxi-top a{
-	padding: 0px 10px;
-	letter-spacing: 1px;
-	color: #333;
-	text-shadow: 0px 1px 1px #fff;
-	display: block;
-	float: left;
-	text-decoration:none;
-}
-.vladmaxi-top a:hover{
-	background: #fff;
-}
-.vladmaxi-top span.right{
-	float: right;
-}
-.vladmaxi-top span.right a{
-	float: left;
-	display: block;
+.border-button:hover {
+  background: rgba(255, 255, 255, .2);
 }
