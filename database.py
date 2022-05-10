@@ -12,7 +12,14 @@ root.geometry("1555x720")  # размер окна
 
 metadata = MetaData()
 engine = None
-url = None
+# url = None
+url = "postgresql+psycopg2://postgres:postgres@localhost:5432/physical_development"
+if not database_exists(url):
+    create_database(url)
+engine = create_engine(url, echo=False)
+metadata.bind = engine
+metadata.reflect()
+
 
 
 # 238 insert_data
@@ -2600,58 +2607,56 @@ def show_table_content(btn, text_box):
 # enter example for table Клиентская база 2: "15" "Пётр" "Петров" "Петрович" "16" "Иван" "Иванович" "Иваненко"
 # enter example for table Договоры 1: "121" "1" "OKKO" "1" "2021-09-24" "2021-09-25"
 def insert_data(btn, entry):
-    def changer():
-        global metadata, url
-        if url is not None:
-            rows, data = entry.get().split(':')
-            rows = int(rows)
-            table_name = lst.get(lst.curselection())
-            data = re.findall(r'"(.*?)"', data)
-            while rows > 0:
-                if table_name == "Клиентская база":
-                    table_insert = metadata.tables[table_name].insert()
-                    table_insert.compile()
-                    table_insert.execute({'Идентификатор': data.pop(0), 'Фамилия': data.pop(0), 'Имя': data.pop(0),
-                                          'Отчество': data.pop(0)})
-                elif table_name == "Почты клиентов":
-                    table_insert = metadata.tables[table_name].insert()
-                    table_insert.compile()
-                    table_insert.execute({'Идентификатор': data.pop(0), 'Почта': data.pop(0)})
-                elif table_name == "Поставщики":
-                    table_insert = metadata.tables[table_name].insert()
-                    table_insert.compile()
-                    table_insert.execute({'Наименование': data.pop(0), 'Оценка': data.pop(0)})
-                elif table_name == "Подписки":
-                    table_insert = metadata.tables[table_name].insert()
-                    table_insert.compile()
-                    table_insert.execute(
-                        {'Название': data.pop(0), 'Описание': data.pop(0), 'Стоимость за день': data.pop(0),
-                         'Поставщик': data.pop(0)})
-                elif table_name == "Контакты":
-                    table_insert = metadata.tables[table_name].insert()
-                    table_insert.compile()
-                    table_insert.execute({'Название': data.pop(0), 'Почта': data.pop(0)})
-                elif table_name == "Договоры":
-                    table_insert = metadata.tables[table_name].insert()
-                    table_insert.compile()
-                    table_insert.execute(
-                        {'Номер': data.pop(0), 'Идентификатор клиента': data.pop(0), 'Название подписки': data.pop(0),
-                         'Вариант подписки': data.pop(0), 'Дата заключения': data.pop(0),
-                         'Дата окончания': data.pop(0)})
-                elif table_name == "Варианты подписки":
-                    table_insert = metadata.tables[table_name].insert()
-                    table_insert.compile()
-                    table_insert.execute({'Вариант': data.pop(0), 'Наценка, %': data.pop(0)})
-                elif table_name == "Итоговая сумма":
-                    table_insert = metadata.tables[table_name].insert()
-                    table_insert.compile()
-                    table_insert.execute({'Номер договора': data.pop(0), 'Оплаченная сумма': data.pop(0)})
-                rows -= 1
-            mb.showinfo("Data insert", message="Insert in {} completed".format(table_name))
-        else:
-            mb.showwarning("WARNING", message="Firstly, connect to DB")
+    global metadata, url
+    if url is not None:
+        rows, data = entry.get().split(':')
+        rows = int(rows)
+        table_name = lst.get(lst.curselection())
+        data = re.findall(r'"(.*?)"', data)
+        while rows > 0:
+            if table_name == "Клиентская база":
+                table_insert = metadata.tables[table_name].insert()
+                table_insert.compile()
+                table_insert.execute({'Идентификатор': data.pop(0), 'Фамилия': data.pop(0), 'Имя': data.pop(0),
+                                      'Отчество': data.pop(0)})
+            elif table_name == "Почты клиентов":
+                table_insert = metadata.tables[table_name].insert()
+                table_insert.compile()
+                table_insert.execute({'Идентификатор': data.pop(0), 'Почта': data.pop(0)})
+            elif table_name == "Поставщики":
+                table_insert = metadata.tables[table_name].insert()
+                table_insert.compile()
+                table_insert.execute({'Наименование': data.pop(0), 'Оценка': data.pop(0)})
+            elif table_name == "Подписки":
+                table_insert = metadata.tables[table_name].insert()
+                table_insert.compile()
+                table_insert.execute(
+                    {'Название': data.pop(0), 'Описание': data.pop(0), 'Стоимость за день': data.pop(0),
+                     'Поставщик': data.pop(0)})
+            elif table_name == "Контакты":
+                table_insert = metadata.tables[table_name].insert()
+                table_insert.compile()
+                table_insert.execute({'Название': data.pop(0), 'Почта': data.pop(0)})
+            elif table_name == "Договоры":
+                table_insert = metadata.tables[table_name].insert()
+                table_insert.compile()
+                table_insert.execute(
+                    {'Номер': data.pop(0), 'Идентификатор клиента': data.pop(0), 'Название подписки': data.pop(0),
+                     'Вариант подписки': data.pop(0), 'Дата заключения': data.pop(0),
+                     'Дата окончания': data.pop(0)})
+            elif table_name == "Варианты подписки":
+                table_insert = metadata.tables[table_name].insert()
+                table_insert.compile()
+                table_insert.execute({'Вариант': data.pop(0), 'Наценка, %': data.pop(0)})
+            elif table_name == "Итоговая сумма":
+                table_insert = metadata.tables[table_name].insert()
+                table_insert.compile()
+                table_insert.execute({'Номер договора': data.pop(0), 'Оплаченная сумма': data.pop(0)})
+            rows -= 1
+        mb.showinfo("Data insert", message="Insert in {} completed".format(table_name))
+    else:
+        mb.showwarning("WARNING", message="Firstly, connect to DB")
 
-    return changer
 
 
 def update_data(btn, entry):  # enter example for table Договоры 1: "1" "IVI" "1" "1999-5-5" "1999-6-6"
